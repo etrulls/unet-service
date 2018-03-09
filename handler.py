@@ -150,13 +150,10 @@ if __name__ == "__main__":
 
     # Treshold
     for i in range(len(prediction)):
-        if model.is_3d:
-            prediction[i] = prediction[i][:, 1, :, :, :] - \
-                prediction[i][:, 0, :, :, :]
-        else:
-            prediction[i] = np.expand_dims(
-                prediction[i][0, 1, :, :] - prediction[i][0, 0, :, :],
-                axis=0)
+        # Get probability and move into [-1, 1] for the plug-in
+        # prediction[i] = (F.softmax(Variable(torch.from_numpy(prediction[i])), dim=1).data.numpy()[0, 1] - .5) * 2
+        # That's way too sharp and makes the threshold widget useless? Do this instead
+        prediction[i] = prediction[i][0, 1] - prediction[i][0, 0]
 
     # Save
     root = "{}/workspace/{}/runs/model-{}/data-{}".format(
@@ -171,5 +168,5 @@ if __name__ == "__main__":
     print(stamp('Saving results...'))
     out = root + '/output.h5'
     with h5py.File(out, 'w') as f:
-        f.create_dataset(name='data', data=np.array(prediction)[:, 0, :, :], chunks=True)
+        f.create_dataset(name='data', data=np.array(prediction), chunks=True)
     print(stamp('Done!'))
