@@ -19,4 +19,4 @@ Github: they are available
 [here](http://icwww.epfl.ch/~trulls/shared/models.tar.gz); just unzip the
 tarball inside this folder (details are forthcoming).
 
-![Teaser](https://raw.githubusercontent.com/etrulls/density-service/master/img/teaser_unet.jpg "Teaser")
+![Teaser](https://raw.githubusercontent.com/etrulls/unet-service/master/img/teaser_unet.jpg "Teaser")
