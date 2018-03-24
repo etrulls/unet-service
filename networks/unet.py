@@ -557,7 +557,8 @@ class UNet(nn.Module):
                                 )
                             except:
                                 print(stamp("Can't do this (3D)"))
-                                embed()
+                                # embed()
+                                raise RuntimeError("Stopping...")
                         else:
                             try:
                                 outer, inner = self.get_chunk(
@@ -573,7 +574,8 @@ class UNet(nn.Module):
                                 )
                             except:
                                 print(stamp("Can't do this (2D)"))
-                                embed()
+                                # embed()
+                                raise RuntimeError("Stopping...")
 
                         # LCN
                         if use_lcn:
